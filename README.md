@@ -19,6 +19,7 @@ $ git clone https://github.com/pavank1933/terraform_aws_test.git      <br/>
 $ cd terraform_aws_test/          <br/>
 $ bash install_terraform.sh      <br/>
 $ bash install_ansible_ubuntu.sh    <br/>
+$ /usr/local/bin/terraform apply                  <br/>      #This does one-click deployment of whole stuff
 
 
 **Note:-<br/>
