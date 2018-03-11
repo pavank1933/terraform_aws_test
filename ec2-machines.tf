@@ -162,8 +162,8 @@ resource "aws_instance" "prometheus_server" {
   inst1= "${aws_instance.phpapp1.id}"
   inst2= "${aws_instance.phpapp2.id}"
   inst3= "${aws_instance.phpapp3.id}"
-  echo "      - targets: ['"${aws_instance.phpapp1.id}":9100', '"${aws_instance.phpapp1.id}":9100', '"${aws_instance.phpapp1.id}":9100']" >> /prometheus.yml
-  echo "      labels" >> /prometheus.yml
-  echo "        group: 'production' ">> /prometheus.yml
+  echo "      - targets: ['"${aws_instance.phpapp1.public_ip}":9100', '"${aws_instance.phpapp1.public_ip}":9100', '"${aws_instance.phpapp1.public_ip}":9100']" >> prometheus.yml
+  echo "      labels" >> prometheus.yml
+  echo "        group: 'production' ">> prometheus.yml
 HEREDOC
 }
