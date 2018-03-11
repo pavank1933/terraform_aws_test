@@ -40,18 +40,6 @@ resource "aws_elb" "web" {
     lb_port           = 80
     lb_protocol       = "http"
   }
-  
-  listener = [{
-    instance_port = "${var.backend_port}"
-    instance_protocol = "${var.backend_protocol}"
-    lb_port = 80
-    lb_protocol = "http"
-  },{
-    instance_port = "${var.backend2_port}"
-    instance_protocol = "${var.backend2_protocol}"
-    lb_port = 8080
-    lb_protocol = "http"
-  }]
 
   health_check {
     healthy_threshold   = 2
