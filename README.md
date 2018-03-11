@@ -24,3 +24,9 @@ $ yum update -y
 $ yum install git -y
 $ git clone https://github.com/pavank1933/terraform_aws_test.git
 $ cd terraform_aws_test/
+
+
+Error Workouts:-
+To get instances in ELB to inservice, have replaced the port of httpd.conf file parameter value from Listen 80 to 8081.
+Then do:- $ service httpd restart
+Changed the ELB health configuration and listener port information as per the screenshots available in this repo.

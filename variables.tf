@@ -11,6 +11,16 @@ variable "AmiLinux" {
   }
   description = "Change the AMI's. I add only 3 regions (Virginia, Oregon, Ireland) to show the map feature but you can add all the regions that you need"
 }
+variable "Ubuntu" {
+  type = "map"
+  default = {
+    us-east-1 = "ami-66506c1c" # Virginia
+    us-west-2 = "ami-5ec1673e" # Oregon
+    eu-west-1 = "ami-9398d3e0" # Ireland
+    us-east-2 = "ami-ea87a78f" # Ohio
+  }
+  description = "Change the AMI's. I add only 3 regions (Virginia, Oregon, Ireland) to show the map feature but you can add all the regions that you need"
+}
 variable "vpc-fullcidr" {
     default = "172.28.0.0/16"
   description = "the vpc cdir"

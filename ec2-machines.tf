@@ -40,6 +40,18 @@ resource "aws_elb" "web" {
     lb_port           = 80
     lb_protocol       = "http"
   }
+  
+  listener = [{
+    instance_port = "${var.backend_port}"
+    instance_protocol = "${var.backend_protocol}"
+    lb_port = 80
+    lb_protocol = "http"
+  },{
+    instance_port = "${var.backend2_port}"
+    instance_protocol = "${var.backend2_protocol}"
+    lb_port = 8080
+    lb_protocol = "http"
+  }]
 
   health_check {
     healthy_threshold   = 2
@@ -166,4 +178,17 @@ resource "aws_instance" "database" {
   mysql -u root -psecret -e 'CREATE TABLE mytable (mycol varchar(255));' test
   mysql -u root -psecret -e "INSERT INTO mytable (mycol) values ('icloudnowthebest') ;" test
 HEREDOC
+}
+
+resource "aws_instance" "ansible" {
+  ami           = "${lookup(var.Ubuntu, var.region)}"
+  instance_type = "t2.micro"
+  associate_public_ip_address = "true"
+  subnet_id = "${aws_subnet.PublicAZA.id}"
+  vpc_security_group_ids = ["${aws_security_group.FrontEnd.id}"]
+  key_name = "${var.key_name}"
+  tags {
+        Name = "ansible"
+  }
+  user_data              = "${file("install_ansible_ubuntu.sh")}"
 }
