@@ -151,8 +151,7 @@ resource "aws_instance" "prometheus_server" {
   key_name = "${var.key_name}"
   tags {
         Name = "prometheus_server"
-  }
-  #user_data              = "${file("install_prometheus_server.sh")}"
+  }  
   user_data = <<HEREDOC
   #!/bin/bash
   sleep 180  
@@ -160,11 +159,11 @@ resource "aws_instance" "prometheus_server" {
   tar xvfz prometheus-*.tar.gz
   cd prometheus-*
   cp -rpf prometheus.yml  prometheus.yml-orig
-  inst1= "${aws_instance.phpapp1.id}"
-  inst2= "${aws_instance.phpapp2.id}"
-  inst3= "${aws_instance.phpapp3.id}"
-  echo "      - targets: ['"${aws_instance.phpapp1.id}":9100', '"${aws_instance.phpapp1.id}":9100', '"${aws_instance.phpapp1.id}":9100']" >> /prometheus.yml
-  echo "      labels" >> /prometheus.yml
-  echo "        group: 'production' ">> /prometheus.yml
+  #inst1= "${aws_instance.phpapp1.id}"
+  #inst2= "${aws_instance.phpapp2.id}"
+  #inst3= "${aws_instance.phpapp3.id}"
+  #echo "      - targets: ['"${aws_instance.phpapp1.id}":9100', '"${aws_instance.phpapp1.id}":9100', '"${aws_instance.phpapp1.id}":9100']" >> /prometheus.yml
+  #echo "      labels" >> /prometheus.yml
+  #echo "        group: 'production' ">> /prometheus.yml
 HEREDOC
 }
