@@ -180,3 +180,16 @@ resource "aws_instance" "ansible" {
   }
   user_data              = "${file("install_ansible_ubuntu.sh")}"
 }
+
+resource "aws_instance" "prometheus_server" {
+  ami           = "${lookup(var.AmiLinux, var.region)}"
+  instance_type = "t2.micro"
+  associate_public_ip_address = "true"
+  subnet_id = "${aws_subnet.PublicAZA.id}"
+  vpc_security_group_ids = ["${aws_security_group.FrontEnd.id}"]
+  key_name = "${var.key_name}"
+  tags {
+        Name = "prometheus_server"
+  }
+  user_data              = "${file("install_prometheus_server.sh")}"
+}
