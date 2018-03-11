@@ -158,9 +158,8 @@ resource "aws_instance" "prometheus_server" {
   tar xvfz prometheus-*.tar.gz
   cd prometheus-*
   cp -rpf prometheus.yml  prometheus.yml-orig  
-  echo "      - targets: ['"${aws_instance.phpapp1.public_ip}":9100', '"${aws_instance.phpapp2.public_ip}":9100', '"${aws_instance.phpapp3.public_ip}":9100']" >> prometheus.yml
-  echo "      labels" >> prometheus.yml
-  echo "        group: 'production' ">> prometheus.yml
+  echo "      - targets: ['"${aws_instance.phpapp1.public_ip}":9100', '"${aws_instance.phpapp2.public_ip}":9100', '"${aws_instance.phpapp3.public_ip}":9100']" >> prometheus.yml  
+  sed -i '29d' prometheus.yml
   ./prometheus --config.file=prometheus.yml
 HEREDOC
 }
