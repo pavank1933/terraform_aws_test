@@ -1,4 +1,4 @@
-# AWS ENVIRONMENT WITH TERRAFORM     <br/>
+# PROMETHEUS_AWS_TERRAFORM_AUTOMATION     <br/>
 Create Infra in AWS using Terraform template. It creates Ec2, DB, ELB, public & private subnets etc.  <br/>
 
 *******Prerequisite:- <br/>
