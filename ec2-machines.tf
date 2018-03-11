@@ -152,5 +152,19 @@ resource "aws_instance" "prometheus_server" {
   tags {
         Name = "prometheus_server"
   }
-  user_data              = "${file("install_prometheus_server.sh")}"
+  #user_data              = "${file("install_prometheus_server.sh")}"
+  user_data = <<HEREDOC
+  #!/bin/bash
+  sleep 180  
+  wget https://github.com/prometheus/prometheus/releases/download/v2.2.0/prometheus-2.2.0.linux-amd64.tar.gz
+  tar xvfz prometheus-*.tar.gz
+  cd prometheus-*
+  cp -rpf prometheus.yml  prometheus.yml-orig
+  inst1= "${aws_instance.phpapp1.id}"
+  inst2= "${aws_instance.phpapp2.id}"
+  inst3= "${aws_instance.phpapp3.id}"
+  echo "      - targets: ['"${aws_instance.phpapp1.id}":9100', '"${aws_instance.phpapp1.id}":9100', '"${aws_instance.phpapp1.id}":9100']" >> /prometheus.yml
+  echo "      labels" >> /prometheus.yml
+  echo "        group: 'production' ">> /prometheus.yml
+HEREDOC
 }
